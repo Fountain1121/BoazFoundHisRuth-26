@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Boaz &amp; Ruth — Wedding Invitation</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"></head><body>
+
+<section id="hero">
+  <div class="eyebrow">Boaz &amp; Ruth are getting married</div>
+  <h1><span id="n1">Ama</span> <em>&amp;</em> <span id="n2">Kofi</span></h1>
+  <div class="stage" id="stage"><div class="tilt" id="tilt">
+    <div class="l-back" id="ib"></div><div class="l-main" id="im"></div><div class="l-frame"></div><div class="l-glare"></div>
+  </div></div>
+  <div class="hint">MOVE, DRAG OR TILT YOUR PHONE</div>
+  <div class="count" id="count"></div>
+  <button class="btn" onclick="document.getElementById('inv').scrollIntoView()">Open Invitation</button>
+</section>
+
+<section id="inv">
+  <div class="eyebrow">You are invited</div>
+  <div class="tabs"><button class="btn" id="t1">Invitation</button><button class="btn ghost" id="t2">Save the Date</button></div>
+  <div class="flip" id="flip"><div class="fin">
+    <div class="face front">
+      <div class="eyebrow">Wedding Celebration</div>
+      <h2><span class="n1"></span> &amp; <span class="n2"></span></h2>
+      <p id="msg"></p>
+      <div class="d" id="dt"></div>
+      <p id="tm"></p><p id="vn"></p><p class="d" id="ht" style="font-size:.95rem">#BoazFoundHisRuth ’26</p>
+    </div>
+    <div class="face back" id="fly"><i>Save the Date</i></div>
+  </div></div>
+  <div class="hint">TAP THE CARD TO FLIP</div>
+</section>
+
+<section id="col">
+  <div class="eyebrow">Wedding Colors</div>
+  <h2 style="font-size:2.4rem">Dress in our palette</h2>
+  <div class="sw" id="sw"></div>
+  <p class="rsvp" id="dress"></p>
+</section>
+
+<button id="gear" aria-label="Customize">⚙</button>
+<aside id="ed">
+  <h3>Customize</h3>
+  <label>Main couple image (becomes 3D)</label><input type="file" accept="image/*" id="fi">
+  <label>Save the Date flyer</label><input type="file" accept="image/*" id="ff">
+  <label>Names</label><div class="row"><input id="e1" value="Ama" style="width:100%"><input id="e2" value="Kofi" style="width:100%"></div>
+  <label>Date</label><input type="datetime-local" id="ed_d">
+  <label>Venue</label><input id="ev">
+  <label>Message</label><textarea id="em" rows="3"></textarea>
+  <label>Colors</label>
+  <div class="row"><input type="color" id="k1"><input id="q1"></div>
+  <div class="row" style="margin-top:6px"><input type="color" id="k2"><input id="q2"></div>
+  <div class="row" style="margin-top:6px"><input type="color" id="k3"><input id="q3"></div>
+  <label>Dress note</label><input id="ed_n">
+  <button class="btn" id="sv">Save &amp; close</button>
+  <button class="btn ghost" id="rs">Reset</button>
+</aside>
+
+<script src="script.js"></script></body></html>
