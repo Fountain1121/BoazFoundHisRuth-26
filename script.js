@@ -1,3 +1,25 @@
+/* ===== VENUE & RSVP SETTINGS (edit these) ===== */
+const VENUES={
+  engagement:{
+    label:'Engagement',
+    name:'Buka Restaurant',
+    address:'Buka Restaurant, Master Bannor Street, Osu, Accra, Ghana',
+    date:'2026-10-30',      // engagement date (YYYY-MM-DD)
+    time:'',                // optional, e.g. '4:00 PM' (leave '' to hide)
+    lat:null, lng:null      // optional exact pin for taxi apps
+  },
+  wedding:{
+    label:'Wedding',
+    name:'Love Country Church Dayspring',
+    address:'Love Country Church Dayspring, Haatso, Accra, Ghana',
+    lat:null, lng:null      // optional exact pin, e.g. lat:5.6500, lng:-0.1800
+  }
+};
+const RSVP={
+  whatsapp:'',   // couple's WhatsApp number, digits only with country code, e.g. '233241234567'
+  email:'',      // optional fallback, e.g. 'rsvp@example.com'
+  deadline:''    // optional text, e.g. 'Please reply by 10 October 2026'
+};
 const $=id=>document.getElementById(id);
 const ph=(a,b)=>'data:image/svg+xml;utf8,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1f5c4a"/><stop offset="1" stop-color="#c9a45c"/></linearGradient></defs><rect width="600" height="800" fill="url(#g)"/><text x="300" y="420" font-family="Georgia" font-size="90" fill="#fff" text-anchor="middle" font-style="italic">${a} &amp; ${b}</text><text x="300" y="480" font-family="Georgia" font-size="26" fill="#fff" text-anchor="middle">add your photo in ⚙</text></svg>`);
 const def={n1:'Boaz',n2:'Ruth',d:'2026-10-31T11:00',v:'Love Country Church Dayspring, Haatso',m:'Two hearts, one story. Together with our families, we joyfully invite you to celebrate our wedding day.',
@@ -41,6 +63,38 @@ $('sv').onclick=()=>{S.n1=$('e1').value;S.n2=$('e2').value;S.d=$('ed_d').value;S
  try{localStorage.setItem('wedx2',JSON.stringify(S))}catch(e){}$('ed').classList.remove('open')};
 $('rs').onclick=()=>{try{localStorage.removeItem('wedx2')}catch(e){}S={...def};render();fill();tick()};
 }
+
+/* venue map + RSVP */
+(function(){
+ let cur='engagement';
+ function showVenue(k){
+  cur=k;const V=VENUES[k];
+  const q=encodeURIComponent(V.address),has=V.lat!=null&&V.lng!=null,ll=has?V.lat+','+V.lng:'';
+  $('mv').textContent=V.label+' · '+V.name;$('ma').textContent=V.address.replace(V.name+', ','');
+  $('mf').src='https://maps.google.com/maps?q='+(has?ll:q)+'&z=16&output=embed';
+  $('l-g').href='https://www.google.com/maps/search/?api=1&query='+(has?ll:q);
+  $('l-a').href='https://maps.apple.com/?q='+encodeURIComponent(V.name)+(has?'&ll='+ll:'&address='+q);
+  $('l-w').href='https://waze.com/ul?'+(has?'ll='+ll:'q='+q)+'&navigate=yes';
+  $('l-u').href='https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[nickname]='+encodeURIComponent(V.name)+'&dropoff[formatted_address]='+q+(has?'&dropoff[latitude]='+V.lat+'&dropoff[longitude]='+V.lng:'');
+  $('cp').textContent='';
+  ['engagement','wedding'].forEach(x=>{const b=$('vt-'+x);b.classList.toggle('ghost',x!==k);b.setAttribute('aria-pressed',x===k)});
+ }
+ $('vt-engagement').onclick=()=>showVenue('engagement');
+ $('vt-wedding').onclick=()=>showVenue('wedding');
+ showVenue('engagement');
+ $('l-c').onclick=async()=>{const a=VENUES[cur].address;try{await navigator.clipboard.writeText(a);$('cp').textContent='Address copied. Paste it into your taxi app.'}catch(e){$('cp').textContent=a}};
+ /* engagement line on the invitation card */
+ const E=VENUES.engagement,ED=new Date(E.date+'T12:00');
+ $('eg').textContent='Engagement · '+ED.toLocaleDateString(undefined,{weekday:'long',day:'numeric',month:'long'})+(E.time?' · '+E.time:'')+' · '+E.name+', Osu';
+ $('rd').textContent=RSVP.deadline||'We would love to know if you can celebrate with us.';
+ $('rf').onsubmit=e=>{e.preventDefault();
+  const t="RSVP for "+S.n1+" & "+S.n2+"'s wedding\nName: "+$('r-n').value+"\nResponse: "+$('r-a').value+"\nGuests: "+$('r-g').value+($('r-m').value?"\nMessage: "+$('r-m').value:'');
+  const s=$('r-s');
+  if(RSVP.whatsapp){window.open('https://wa.me/'+RSVP.whatsapp.replace(/\D/g,'')+'?text='+encodeURIComponent(t),'_blank');s.textContent='WhatsApp is opening. Press send there to complete your RSVP.'}
+  else if(RSVP.email){location.href='mailto:'+RSVP.email+'?subject='+encodeURIComponent('Wedding RSVP')+'&body='+encodeURIComponent(t);s.textContent='Your email app is opening.'}
+  else{try{navigator.clipboard.writeText(t)}catch(x){}s.textContent='RSVP is not connected yet. Add a WhatsApp number in script.js.'}
+ }
+})();
 /* petals */
 for(let i=0;i<12;i++){const p=document.createElement('div');p.className='petal';p.style.cssText=`left:${Math.random()*100}vw;width:${8+Math.random()*8}px;height:${12+Math.random()*8}px;border-radius:60% 0 60% 0;background:var(--c3);animation-duration:${9+Math.random()*10}s;animation-delay:-${Math.random()*15}s`;document.body.appendChild(p)}
 render();tick();setInterval(tick,1000);

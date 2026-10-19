@@ -25,7 +25,7 @@
       <h2><span class="n1"></span> &amp; <span class="n2"></span></h2>
       <p id="msg"></p>
       <div class="d" id="dt"></div>
-      <p id="tm"></p><p id="vn"></p><p class="d" id="ht" style="font-size:.95rem">#BoazFoundHisRuth ’26</p>
+      <p id="tm"></p><p id="vn"></p><p class="eg" id="eg"></p><p class="d" id="ht" style="font-size:.95rem">#BoazFoundHisRuth ’26</p>
     </div>
     <div class="face back" id="fly"><i>Save the Date</i></div>
   </div></div>
@@ -38,6 +38,42 @@
   <div class="sw" id="sw"></div>
   <p class="rsvp" id="dress"></p>
 </section>
+
+<section id="map">
+  <div class="eyebrow">Getting there</div>
+  <h2 style="font-size:2.4rem">Find the venues</h2>
+  <div class="tabs" role="group" aria-label="Choose event"><button class="btn" id="vt-engagement" type="button" aria-pressed="true">Engagement</button><button class="btn ghost" id="vt-wedding" type="button" aria-pressed="false">Wedding</button></div>
+  <p class="rsvp"><b id="mv"></b><br><span id="ma"></span></p>
+  <div class="mapbox"><iframe id="mf" title="Wedding venue map" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
+  <div class="links" id="ml">
+    <a class="btn" id="l-g" target="_blank" rel="noopener">Google Maps</a>
+    <a class="btn" id="l-a" target="_blank" rel="noopener">Apple Maps</a>
+    <a class="btn" id="l-w" target="_blank" rel="noopener">Waze</a>
+    <a class="btn" id="l-u" target="_blank" rel="noopener">Request an Uber</a>
+    <button class="btn ghost" id="l-c" type="button">Copy address for Bolt / Yango</button>
+  </div>
+  <div class="hint" id="cp" role="status"></div>
+</section>
+
+<!--
+<section id="rsvp">
+  <div class="eyebrow">Kindly respond</div>
+  <h2 style="font-size:2.4rem">RSVP</h2>
+  <p class="rsvp" id="rd"></p>
+  <form id="rf" class="rform">
+    <label>Your name<input id="r-n" required autocomplete="name" placeholder="Full name"></label>
+    <label>Will you be joining us?
+      <select id="r-a"><option value="Joyfully accepts">Yes, I will be there</option><option value="Regretfully declines">Sorry, I can&rsquo;t make it</option></select>
+    </label>
+    <label>Number of guests (including you)
+      <select id="r-g"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+    </label>
+    <label>Message to the couple (optional)<textarea id="r-m" rows="3"></textarea></label>
+    <button class="btn" type="submit" id="r-b">Send RSVP</button>
+    <div class="hint" id="r-s" role="status"></div>
+  </form>
+</section>
+-->
 
 <!-- EDITOR PANEL (hidden from public). To re-enable, delete this comment start and end markers.
 <button id="gear" aria-label="Customize">⚙</button>
