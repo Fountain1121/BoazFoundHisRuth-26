@@ -64,7 +64,11 @@ $('sv').onclick=()=>{S.n1=$('e1').value;S.n2=$('e2').value;S.d=$('ed_d').value;S
 $('rs').onclick=()=>{try{localStorage.removeItem('wedx2')}catch(e){}S={...def};render();fill();tick()};
 }
 
-/* venue map + RSVP */
+render();tick();setInterval(tick,1000);
+/* petals */
+try{for(let i=0;i<12;i++){const p=document.createElement('div');p.className='petal';p.style.cssText=`left:${Math.random()*100}vw;width:${8+Math.random()*8}px;height:${12+Math.random()*8}px;border-radius:60% 0 60% 0;background:var(--c3);animation-duration:${9+Math.random()*10}s;animation-delay:-${Math.random()*15}s`;document.body.appendChild(p)}}catch(e){console.error(e)}
+/* venue map + RSVP (isolated so it can never block the images/colors above) */
+try{
 (function(){
  let cur='engagement';
  function showVenue(k){
@@ -95,6 +99,4 @@ $('rs').onclick=()=>{try{localStorage.removeItem('wedx2')}catch(e){}S={...def};r
   else{try{navigator.clipboard.writeText(t)}catch(x){}s.textContent='RSVP is not connected yet. Add a WhatsApp number in script.js.'}
  }
 })();
-/* petals */
-for(let i=0;i<12;i++){const p=document.createElement('div');p.className='petal';p.style.cssText=`left:${Math.random()*100}vw;width:${8+Math.random()*8}px;height:${12+Math.random()*8}px;border-radius:60% 0 60% 0;background:var(--c3);animation-duration:${9+Math.random()*10}s;animation-delay:-${Math.random()*15}s`;document.body.appendChild(p)}
-render();tick();setInterval(tick,1000);
+}catch(e){console.error('Map/RSVP section failed:',e)}
